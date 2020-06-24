@@ -26,7 +26,7 @@ RUN apt-get -qq update && apt-get install -y \
     apt-transport-https \ 
     locales \
     krb5-user \
-    && ACCEPT_EULA=Y apt-get install --yes --no-install-recommends msodbcsql17
+    && ACCEPT_EULA=Y apt-get install --yes --no-install-recommends msodbcsql17 \
     ## clean up
     && apt-get clean \ 
     && rm -rf /var/lib/apt/lists/ \ 
