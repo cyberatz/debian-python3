@@ -1,4 +1,4 @@
-FROM python:latest
+FROM python:slim
 # install cron and R package dependencies
 ENV DEBIAN_FRONTEND noninteractive
  
@@ -27,7 +27,7 @@ RUN apt-get -qq update && apt-get install -qq -y \
     
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - 
 RUN curl https://packages.microsoft.com/config/debian/$(grep VERSION_ID /etc/os-release|sed 's/[^0-9]*//g')/prod.list > /etc/apt/sources.list.d/mssql-release.list 
-RUN sudo apt-get -o Acquire::CompressionTypes::Order::=bz2 update \ 
+RUN sudo apt-get -o Acquire::CompressionTypes::Order::=gz update \ 
      && apt-get -qq update 
 RUN ACCEPT_EULA=Y apt-get install --yes --no-install-recommends msodbcsql17 \
     ## clean up
