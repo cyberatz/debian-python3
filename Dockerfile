@@ -1,4 +1,4 @@
-FROM python:slim
+FROM python:latest
 # install cron and R package dependencies
 ENV DEBIAN_FRONTEND noninteractive
  
