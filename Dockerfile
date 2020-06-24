@@ -35,7 +35,7 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/* \
  && rm -rf /tmp/*
  #RUN pip install pandas dask configparser simplejson SQLAlchemy PyMySQL Cython pandas dask requests chardet openpyxl ipython Alembic pyodbc toolz fsspec cloudpickle pymssql
- RUN pip install pandas dask configparser simplejson SQLAlchemy PyMySQL Cython pandas dask requests chardet openpyxl ipython Alembic pyodbc toolz fsspec cloudpickle 
+ RUN pip install pandas dask configparser simplejson SQLAlchemy PyMySQL Cython pandas dask requests chardet openpyxl ipython Alembic pyodbc toolz fsspec cloudpickle prettytable 
  RUN apt-get -qq update && apt-get install -qq apt-transport-https locales krb5-user && apt-get -qq clean
 
  RUN locale-gen "en_US.UTF-8"
