@@ -16,20 +16,24 @@ RUN apt-get update && apt-get install -y \
     libopenblas-base \
     cfortran \
     liblapack-dev \
+    apt-transport-https \
+    curl \
+    gnupg \
+    unixodbc-dev \
     ## clean up
     && apt-get clean \ 
     && rm -rf /var/lib/apt/lists/ \ 
     && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
 
-RUN apt-get update \
- && apt-get install --yes --no-install-recommends \
-        apt-transport-https \
-        curl \
-        gnupg \
-        unixodbc-dev \
- && apt-get clean \ 
-    && rm -rf /var/lib/apt/lists/ \ 
-    && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
+#RUN apt-get update \
+# && apt-get install --yes --no-install-recommends \
+#        apt-transport-https \
+#        curl \
+#        gnupg \
+#        unixodbc-dev \
+# && apt-get clean \ 
+#    && rm -rf /var/lib/apt/lists/ \ 
+#    && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
     
  RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - 
  RUN curl https://packages.microsoft.com/config/debian/$(grep VERSION_ID /etc/os-release|sed 's/[^0-9]*//g')/prod.list > /etc/apt/sources.list.d/mssql-release.list 
