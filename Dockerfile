@@ -1,7 +1,9 @@
 FROM python:slim
 # install cron and R package dependencies
 ENV DEBIAN_FRONTEND noninteractive
-RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
+
+RUN apt install -qq curl \
+    && curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
     && curl https://packages.microsoft.com/config/debian/$(grep VERSION_ID /etc/os-release|sed 's/[^0-9]*//g')/prod.list > /etc/apt/sources.list.d/mssql-release.list 
  
 RUN apt-get -qq update && apt-get install -y \
