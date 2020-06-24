@@ -25,16 +25,19 @@ RUN apt-get -qq update && apt-get install -qq -y \
     locales \
     krb5-user 
     
-RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - 
-RUN curl https://packages.microsoft.com/config/debian/$(grep VERSION_ID /etc/os-release|sed 's/[^0-9]*//g')/prod.list > /etc/apt/sources.list.d/mssql-release.list 
-RUN apt-get -o Acquire::CompressionTypes::Order::=gz update \ 
-     && apt-get -qq update 
-RUN ACCEPT_EULA=Y apt-get install --yes --no-install-recommends msodbcsql17 \
-    ## clean up
-    && apt-get clean \ 
-    && rm -rf /var/lib/apt/lists/ \ 
-    && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
+## USE when Microsoft mirror works
+#RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - 
+#    && curl https://packages.microsoft.com/config/debian/$(grep VERSION_ID /etc/os-release|sed 's/[^0-9]*//g')/prod.list > /etc/apt/sources.list.d/mssql-release.list \
+#    && apt-get -qq update \
+#    && ACCEPT_EULA=Y apt-get install --yes --no-install-recommends msodbcsql17 \
+#    ## clean up
+#    && apt-get clean \ 
+#    && rm -rf /var/lib/apt/lists/ \ 
+#    && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
 
+## Microsoft broken mirror workaround
+RUN curl -o https://packages.microsoft.com/debian/10/prod/pool/main/m/msodbcsql17/msodbcsql17_17.5.2.1-1_amd64.deb \
+    && dpkg -i msodbcsql17_17.5.2.1-1_amd64.deb
 
 RUN pip install pandas dask configparser simplejson SQLAlchemy PyMySQL Cython pandas dask requests chardet openpyxl ipython Alembic pyodbc toolz fsspec cloudpickle prettytable 
  #RUN apt-get -qq update && apt-get install -qq apt-transport-https locales krb5-user && apt-get -qq clean
