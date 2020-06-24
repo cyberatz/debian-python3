@@ -1,7 +1,10 @@
 FROM python:slim
 # install cron and R package dependencies
 ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get update && apt-get install -y \
+RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
+    && curl https://packages.microsoft.com/config/debian/$(grep VERSION_ID /etc/os-release|sed 's/[^0-9]*//g')/prod.list > /etc/apt/sources.list.d/mssql-release.list 
+ 
+RUN apt-get -qq update && apt-get install -y \
     odbc-postgresql \
     libsqliteodbc \
     git \
@@ -20,6 +23,10 @@ RUN apt-get update && apt-get install -y \
     curl \
     gnupg \
     unixodbc-dev \
+    apt-transport-https \ 
+    locales \
+    krb5-user \
+    && ACCEPT_EULA=Y apt-get install --yes --no-install-recommends msodbcsql17
     ## clean up
     && apt-get clean \ 
     && rm -rf /var/lib/apt/lists/ \ 
@@ -35,16 +42,16 @@ RUN apt-get update && apt-get install -y \
 #    && rm -rf /var/lib/apt/lists/ \ 
 #    && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
     
- RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - 
- RUN curl https://packages.microsoft.com/config/debian/$(grep VERSION_ID /etc/os-release|sed 's/[^0-9]*//g')/prod.list > /etc/apt/sources.list.d/mssql-release.list 
- RUN apt-get update && ACCEPT_EULA=Y apt-get install --yes --no-install-recommends msodbcsql17 
+ #RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - 
+ #RUN curl https://packages.microsoft.com/config/debian/$(grep VERSION_ID /etc/os-release|sed 's/[^0-9]*//g')/prod.list > /etc/apt/sources.list.d/mssql-release.list 
+ #RUN apt update && ACCEPT_EULA=Y apt-get install --yes --no-install-recommends msodbcsql17 \
  
- RUN apt-get clean \
- && rm -rf /var/lib/apt/lists/* \
- && rm -rf /tmp/*
+ #RUN apt-get clean \
+ #&& rm -rf /var/lib/apt/lists/* \
+ #&& rm -rf /tmp/*
  #RUN pip install pandas dask configparser simplejson SQLAlchemy PyMySQL Cython pandas dask requests chardet openpyxl ipython Alembic pyodbc toolz fsspec cloudpickle pymssql
  RUN pip install pandas dask configparser simplejson SQLAlchemy PyMySQL Cython pandas dask requests chardet openpyxl ipython Alembic pyodbc toolz fsspec cloudpickle prettytable 
- RUN apt-get -qq update && apt-get install -qq apt-transport-https locales krb5-user && apt-get -qq clean
+ #RUN apt-get -qq update && apt-get install -qq apt-transport-https locales krb5-user && apt-get -qq clean
 
  RUN locale-gen "en_US.UTF-8"
  RUN echo "LC_ALL=\"en_US.UTF-8\"" >> /etc/default/locale
