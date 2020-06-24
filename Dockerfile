@@ -1,10 +1,6 @@
 FROM python:slim
 # install cron and R package dependencies
 ENV DEBIAN_FRONTEND noninteractive
-
-RUN apt-get -qq update && apt-get install -y curl \
-    && curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
-    && curl https://packages.microsoft.com/config/debian/$(grep VERSION_ID /etc/os-release|sed 's/[^0-9]*//g')/prod.list > /etc/apt/sources.list.d/mssql-release.list 
  
 RUN apt-get -qq update && apt-get install -y \
     odbc-postgresql \
@@ -27,7 +23,10 @@ RUN apt-get -qq update && apt-get install -y \
     unixodbc-dev \
     apt-transport-https \ 
     locales \
-    krb5-user \
+    krb5-user 
+    
+ RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
+    && curl https://packages.microsoft.com/config/debian/$(grep VERSION_ID /etc/os-release|sed 's/[^0-9]*//g')/prod.list > /etc/apt/sources.list.d/mssql-release.list \
     && ACCEPT_EULA=Y apt-get install --yes --no-install-recommends msodbcsql17 \
     ## clean up
     && apt-get clean \ 
