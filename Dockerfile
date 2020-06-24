@@ -51,3 +51,5 @@ ENV KRB5CCNAME=FILE:/app/tgt
 
 COPY init-script.sh configureKerberosClient.sh /tmp/
 CMD /tmp/init-script.sh
+
+WORKDIR /app
