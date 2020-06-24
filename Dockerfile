@@ -36,7 +36,7 @@ RUN apt-get -qq update && apt-get install -qq -y \
 #    && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
 
 ## Microsoft broken mirror workaround
-RUN curl -o https://packages.microsoft.com/debian/10/prod/pool/main/m/msodbcsql17/msodbcsql17_17.5.2.1-1_amd64.deb \
+RUN curl -O https://packages.microsoft.com/debian/10/prod/pool/main/m/msodbcsql17/msodbcsql17_17.5.2.1-1_amd64.deb \
     && dpkg -i msodbcsql17_17.5.2.1-1_amd64.deb
 
 RUN pip install pandas dask configparser simplejson SQLAlchemy PyMySQL Cython pandas dask requests chardet openpyxl ipython Alembic pyodbc toolz fsspec cloudpickle prettytable 
