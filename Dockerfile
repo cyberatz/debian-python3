@@ -40,7 +40,7 @@ RUN apt-get install -qq -y unixodbc unixodbc-dev \
     && curl -O https://packages.microsoft.com/debian/10/prod/pool/main/m/msodbcsql17/msodbcsql17_17.5.2.1-1_amd64.deb \
     && ACCEPT_EULA=Y dpkg -i msodbcsql17_17.5.2.1-1_amd64.deb
 
-RUN pip install pandas dask configparser simplejson SQLAlchemy PyMySQL Cython pandas dask requests chardet openpyxl ipython Alembic pyodbc toolz fsspec cloudpickle prettytable 
+RUN pip install pandas dask configparser simplejson SQLAlchemy PyMySQL Cython pandas dask requests chardet openpyxl ipython Alembic pyodbc toolz fsspec cloudpickle prettytable ciscoconfparse
  #RUN apt-get -qq update && apt-get install -qq apt-transport-https locales krb5-user && apt-get -qq clean
 
 RUN locale-gen "en_US.UTF-8"
