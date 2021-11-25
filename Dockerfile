@@ -37,7 +37,7 @@ RUN apt-get -qq update && apt-get install -qq -y \
 
 ## Microsoft broken mirror workaround
 RUN apt-get install -qq -y unixodbc unixodbc-dev \
-    && curl -O https://packages.microsoft.com/debian/10/prod/pool/main/m/msodbcsql17/msodbcsql17_17.5.2.1-1_amd64.deb \
+    && curl -O https://packages.microsoft.com/debian/10/prod/pool/main/m/msodbcsql17/msodbcsql17_17.8.1.1-1_amd64.deb \
     && ACCEPT_EULA=Y dpkg -i msodbcsql17_17.5.2.1-1_amd64.deb
 
 RUN pip install pandas dask configparser simplejson SQLAlchemy PyMySQL Cython pandas dask requests chardet openpyxl ipython Alembic pyodbc toolz fsspec cloudpickle prettytable ciscoconfparse
