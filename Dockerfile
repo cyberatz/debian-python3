@@ -54,6 +54,9 @@ RUN echo "LC_ALL=\"en_US.UTF-8\"" >> /etc/default/locale
 #lower TLS version requirement
 RUN curl -o /etc/ssl/openssl.cnf https://github.com/openssl/openssl/blob/master/apps/openssl.cnf
 RUN echo "[default_conf]\nssl_conf = ssl_sect\n[ssl_sect]\nsystem_default = system_default_sect\n[system_default_sect]\nMinProtocol = TLSv1\nCipherString = DEFAULT@SECLEVEL=1" >> /etc/ssl/openssl.cnf
+RUN chmod +rwx /etc/ssl/openssl.cnf
+RUN sed -i 's/TLSv1.2/TLSv1/g' /etc/ssl/openssl.cnf
+RUN sed -i 's/SECLEVEL=2/SECLEVEL=1/g' /etc/ssl/openssl.cnf
 
 ENV KADMIN_PRINCIPAL_FULL=$KADMIN_PRINCIPAL@$REALM
 ENV KRB5CCNAME=FILE:/app/tgt
