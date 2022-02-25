@@ -46,7 +46,7 @@ RUN apt-get -qq update && apt-get install -qq -y \
 #    && ACCEPT_EULA=Y dpkg -i msodbcsql18_18.0.1.1-1_amd64.deb \
 #    && apt-get -qq clean
 
-RUN pip install pandas dask configparser simplejson SQLAlchemy PyMySQL Cython pandas dask requests chardet openpyxl ipython Alembic pyodbc toolz fsspec cloudpickle prettytable ciscoconfparse
+RUN pip install pandas dask configparser simplejson SQLAlchemy PyMySQL Cython pandas dask requests chardet openpyxl ipython Alembic pyodbc toolz fsspec cloudpickle prettytable ciscoconfparse paramiko scp
 
 RUN locale-gen "en_US.UTF-8"
 RUN echo "LC_ALL=\"en_US.UTF-8\"" >> /etc/default/locale
