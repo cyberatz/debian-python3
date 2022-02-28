@@ -2,7 +2,8 @@ FROM python:latest
 # install cron and R package dependencies
 ENV DEBIAN_FRONTEND noninteractive
  
-RUN locale-gen "en_US.UTF-8" && echo "LC_ALL=\"en_US.UTF-8\"" >> /etc/default/locale
+RUN echo "LC_ALL=\"en_US.UTF-8\"" >> /etc/default/locale
+RUN locale-gen "en_US.UTF-8" 
 RUN apt-get -qq update \
     && apt-get install -qq -y \
     odbc-postgresql \
