@@ -2,8 +2,6 @@ FROM python:latest
 # install cron and R package dependencies
 ENV DEBIAN_FRONTEND noninteractive
  
-RUN echo "LC_ALL=\"en_US.UTF-8\"" >> /etc/default/locale
-RUN locale-gen "en_US.UTF-8" 
 RUN apt-get -qq update \
     && apt-get install -qq -y \
     odbc-postgresql \
@@ -28,6 +26,8 @@ RUN apt-get -qq update \
     apt-transport-https \ 
     locales \
     krb5-user \
+    && echo "LC_ALL=\"en_US.UTF-8\"" >> /etc/default/locale \
+    && locale-gen "en_US.UTF-8" \
     && curl -O https://packages.microsoft.com/debian/11/prod/pool/main/m/msodbcsql18/msodbcsql18_18.0.1.1-1_amd64.deb \
     && ACCEPT_EULA=Y dpkg -i msodbcsql18_18.0.1.1-1_amd64.deb \
     && rm msodbcsql18_18.0.1.1-1_amd64.deb \
