@@ -3,8 +3,8 @@ FROM python:latest
 ENV DEBIAN_FRONTEND noninteractive
  
 RUN locale-gen "en_US.UTF-8" && echo "LC_ALL=\"en_US.UTF-8\"" >> /etc/default/locale \
-    && apt-get -qq update \
-    && apt-get install -qq -y \
+    && apt-get -qq update 
+RUN apt-get install -qq -y \
     odbc-postgresql \
     libsqliteodbc \
     git \
