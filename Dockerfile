@@ -32,6 +32,7 @@ RUN apt-get -qq update \
     && ACCEPT_EULA=Y dpkg -i msodbcsql18_18.0.1.1-1_amd64.deb \
     && rm msodbcsql18_18.0.1.1-1_amd64.deb \
     && apt-get -qq clean \
+    && python -m pip install --upgrade pip \
     && pip install pandas dask configparser simplejson SQLAlchemy PyMySQL Cython pandas dask requests chardet openpyxl ipython Alembic pyodbc toolz fsspec cloudpickle prettytable ciscoconfparse paramiko scp webdavclient3
 
 #lower TLS version requirement
