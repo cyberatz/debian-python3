@@ -26,6 +26,7 @@ RUN apt-get -qq update \
     apt-transport-https \ 
     locales \
     krb5-user \
+    python3-pip \
     && echo "LC_ALL=\"en_US.UTF-8\"" >> /etc/default/locale \
     && locale-gen "en_US.UTF-8" \
     && curl -O https://packages.microsoft.com/debian/11/prod/pool/main/m/msodbcsql18/msodbcsql18_18.0.1.1-1_amd64.deb \
@@ -33,8 +34,8 @@ RUN apt-get -qq update \
     && rm msodbcsql18_18.0.1.1-1_amd64.deb \
     && apt-get -qq clean \
     && python -m pip install --upgrade pip \
-    && pip install pandas dask configparser simplejson SQLAlchemy PyMySQL Cython requests chardet openpyxl ipython Alembic pyodbc toolz fsspec cloudpickle prettytable ciscoconfparse paramiko scp webdavclient3 \
-    && python3 -m pip install --upgrade pip3
+    && pip install pandas dask configparser simplejson SQLAlchemy PyMySQL Cython requests chardet openpyxl ipython Alembic pyodbc toolz fsspec cloudpickle prettytable ciscoconfparse paramiko scp webdavclient3
+    
 
 #lower TLS version requirement
 RUN curl -o /etc/ssl/openssl.cnf https://github.com/openssl/openssl/blob/master/apps/openssl.cnf \
