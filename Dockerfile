@@ -2,8 +2,9 @@ FROM --platform=$BUILDPLATFORM python:latest
 # install cron and R package dependencies
 ENV DEBIAN_FRONTEND noninteractive
  
-RUN apt-get -qq update \
-    && apt-get install -qq -y \
+RUN apt-get -qq update
+
+RUN apt-get install -qq -y \
     odbc-postgresql \
     libsqliteodbc \
     git \
