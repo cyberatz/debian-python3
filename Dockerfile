@@ -28,8 +28,9 @@ RUN apt-get -qq update \
     krb5-user \
     python3-pip \
     && echo "LC_ALL=\"en_US.UTF-8\"" >> /etc/default/locale \
-    && locale-gen "en_US.UTF-8" \
-    && curl -O https://packages.microsoft.com/debian/11/prod/pool/main/m/msodbcsql18/msodbcsql18_18.0.1.1-1_amd64.deb \
+    && locale-gen "en_US.UTF-8" 
+
+RUN curl -O https://packages.microsoft.com/debian/11/prod/pool/main/m/msodbcsql18/msodbcsql18_18.0.1.1-1_amd64.deb \
     && ACCEPT_EULA=Y dpkg -i msodbcsql18_18.0.1.1-1_amd64.deb \
     && rm msodbcsql18_18.0.1.1-1_amd64.deb \
     && apt-get -qq clean \
