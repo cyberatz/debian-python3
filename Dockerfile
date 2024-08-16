@@ -1,4 +1,4 @@
-FROM python:latest
+FROM --platform=$BUILDPLATFORM python:latest
 # install cron and R package dependencies
 ENV DEBIAN_FRONTEND noninteractive
  
