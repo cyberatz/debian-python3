@@ -10,7 +10,7 @@ RUN apt-get install -qq -y \
     git \
     gcc \
     libssl-dev \
-    python-dev \
+    python3-dev \
     cython3 \
     g++ \
     freetds-dev \
