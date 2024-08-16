@@ -17,7 +17,6 @@ RUN apt-get install -qq -y \
     freetds-bin \
     unixodbc \
     unixodbc-dev \
-    libopenblas-base \
     cfortran \
     liblapack-dev \
     apt-transport-https \
@@ -30,6 +29,8 @@ RUN apt-get install -qq -y \
     python3-pip \
     && echo "LC_ALL=\"en_US.UTF-8\"" >> /etc/default/locale \
     && locale-gen "en_US.UTF-8" 
+
+#libopenblas-base \
 
 RUN curl -O https://packages.microsoft.com/debian/11/prod/pool/main/m/msodbcsql18/msodbcsql18_18.0.1.1-1_amd64.deb \
     && ACCEPT_EULA=Y dpkg -i msodbcsql18_18.0.1.1-1_amd64.deb \
